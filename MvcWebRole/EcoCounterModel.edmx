@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EcoCounterModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EcoCounterModelStoreContainer">
+          <EntitySet Name="APPLY_RANGE" EntityType="EcoCounterModel.Store.APPLY_RANGE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="COMPANIES" EntityType="EcoCounterModel.Store.COMPANIES" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ECO_ACTION_PERFORMANCES" EntityType="EcoCounterModel.Store.ECO_ACTION_PERFORMANCES" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ECO_ACTIONS" EntityType="EcoCounterModel.Store.ECO_ACTIONS" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GROUPS" EntityType="EcoCounterModel.Store.GROUPS" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ICONS" EntityType="EcoCounterModel.Store.ICONS" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RANGES" EntityType="EcoCounterModel.Store.RANGES" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ROLES" EntityType="EcoCounterModel.Store.ROLES" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="USERS" EntityType="EcoCounterModel.Store.USERS" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="APPLY_RANGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RANGE_ID" Type="int" />
+          <Property Name="TARGET" Type="int" />
+        </EntityType>
+        <EntityType Name="COMPANIES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ECO_ACTION_PERFORMANCES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ID" Type="int" />
+          <Property Name="ECO_ACTION_ID" Type="int" />
+          <Property Name="DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ECO_ACTIONS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ECO_ACTION" Type="int" />
+          <Property Name="NAME" Type="varchar" MaxLength="30" />
+          <Property Name="CO2" Type="int" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="100" />
+          <Property Name="ICON_ID" Type="int" />
+          <Property Name="APPLY_DATE" Type="datetime" />
+          <Property Name="DEL_FLAG" Type="int" />
+        </EntityType>
+        <EntityType Name="GROUPS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="varchar" MaxLength="30" />
+          <Property Name="COMPANY_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ICONS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="varchar" MaxLength="30" />
+          <Property Name="ICON" Type="binary" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="RANGES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="30" />
+          <Property Name="NAME_JA" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="30" />
+          <Property Name="NAME_JA" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GROUP_ID" Type="int" Nullable="false" />
+          <Property Name="USER" Type="varchar" MaxLength="30" />
+          <Property Name="NAME" Type="varchar" MaxLength="30" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="32" />
+          <Property Name="LOGIN_KEY" Type="varchar" MaxLength="50" />
+          <Property Name="ROLE_ID" Type="int" />
+          <Property Name="APPLY_DATE" Type="datetime" />
+          <Property Name="DEL_FLAG" Type="int" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EcoCounterModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EcoCounterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APPLY_RANGE" EntityType="EcoCounterModel.APPLY_RANGE" />
+          <EntitySet Name="COMPANIES" EntityType="EcoCounterModel.COMPANY" />
+          <EntitySet Name="ECO_ACTION_PERFORMANCES" EntityType="EcoCounterModel.ECO_ACTION_PERFORMANCES" />
+          <EntitySet Name="ECO_ACTIONS" EntityType="EcoCounterModel.ECO_ACTIONS" />
+          <EntitySet Name="GROUPS" EntityType="EcoCounterModel.GROUP" />
+          <EntitySet Name="ICONS" EntityType="EcoCounterModel.ICON" />
+          <EntitySet Name="RANGES" EntityType="EcoCounterModel.RANGE" />
+          <EntitySet Name="ROLES" EntityType="EcoCounterModel.ROLE" />
+          <EntitySet Name="USERS" EntityType="EcoCounterModel.USER" />
+        </EntityContainer>
+        <EntityType Name="APPLY_RANGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RANGE_ID" Type="Int32" />
+          <Property Name="TARGET" Type="Int32" />
+        </EntityType>
+        <EntityType Name="COMPANY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ECO_ACTION_PERFORMANCES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ID" Type="Int32" />
+          <Property Name="ECO_ACTION_ID" Type="Int32" />
+          <Property Name="DATE" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="ECO_ACTIONS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ECO_ACTION" Type="Int32" />
+          <Property Name="NAME" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="CO2" Type="Int32" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ICON_ID" Type="Int32" />
+          <Property Name="APPLY_DATE" Type="DateTime" />
+          <Property Name="DEL_FLAG" Type="Int32" />
+        </EntityType>
+        <EntityType Name="GROUP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="COMPANY_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ICON">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="ICON1" Type="Binary" MaxLength="1" FixedLength="true" />
+        </EntityType>
+        <EntityType Name="RANGE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="NAME_JA" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="NAME_JA" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GROUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="USERID" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="NAME" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+          <Property Name="LOGIN_KEY" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ROLE_ID" Type="Int32" />
+          <Property Name="APPLY_DATE" Type="DateTime" />
+          <Property Name="DEL_FLAG" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EcoCounterModelStoreContainer" CdmEntityContainer="EcoCounterEntities">
+          <EntitySetMapping Name="APPLY_RANGE"><EntityTypeMapping TypeName="EcoCounterModel.APPLY_RANGE"><MappingFragment StoreEntitySet="APPLY_RANGE">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="RANGE_ID" ColumnName="RANGE_ID" />
+            <ScalarProperty Name="TARGET" ColumnName="TARGET" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="COMPANIES"><EntityTypeMapping TypeName="EcoCounterModel.COMPANY"><MappingFragment StoreEntitySet="COMPANIES">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="NAME" ColumnName="NAME" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ECO_ACTION_PERFORMANCES"><EntityTypeMapping TypeName="EcoCounterModel.ECO_ACTION_PERFORMANCES"><MappingFragment StoreEntitySet="ECO_ACTION_PERFORMANCES">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+            <ScalarProperty Name="ECO_ACTION_ID" ColumnName="ECO_ACTION_ID" />
+            <ScalarProperty Name="DATE" ColumnName="DATE" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ECO_ACTIONS"><EntityTypeMapping TypeName="EcoCounterModel.ECO_ACTIONS"><MappingFragment StoreEntitySet="ECO_ACTIONS">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ECO_ACTION" ColumnName="ECO_ACTION" />
+            <ScalarProperty Name="NAME" ColumnName="NAME" />
+            <ScalarProperty Name="CO2" ColumnName="CO2" />
+            <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+            <ScalarProperty Name="ICON_ID" ColumnName="ICON_ID" />
+            <ScalarProperty Name="APPLY_DATE" ColumnName="APPLY_DATE" />
+            <ScalarProperty Name="DEL_FLAG" ColumnName="DEL_FLAG" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="GROUPS"><EntityTypeMapping TypeName="EcoCounterModel.GROUP"><MappingFragment StoreEntitySet="GROUPS">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="NAME" ColumnName="NAME" />
+            <ScalarProperty Name="COMPANY_ID" ColumnName="COMPANY_ID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ICONS"><EntityTypeMapping TypeName="EcoCounterModel.ICON"><MappingFragment StoreEntitySet="ICONS">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="NAME" ColumnName="NAME" />
+            <ScalarProperty Name="ICON1" ColumnName="ICON" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="RANGES"><EntityTypeMapping TypeName="EcoCounterModel.RANGE"><MappingFragment StoreEntitySet="RANGES">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="NAME" ColumnName="NAME" />
+            <ScalarProperty Name="NAME_JA" ColumnName="NAME_JA" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ROLES"><EntityTypeMapping TypeName="EcoCounterModel.ROLE"><MappingFragment StoreEntitySet="ROLES">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="NAME" ColumnName="NAME" />
+            <ScalarProperty Name="NAME_JA" ColumnName="NAME_JA" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="USERS"><EntityTypeMapping TypeName="EcoCounterModel.USER"><MappingFragment StoreEntitySet="USERS">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+            <ScalarProperty Name="USERID" ColumnName="USER" />
+            <ScalarProperty Name="NAME" ColumnName="NAME" />
+            <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+            <ScalarProperty Name="LOGIN_KEY" ColumnName="LOGIN_KEY" />
+            <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+            <ScalarProperty Name="APPLY_DATE" ColumnName="APPLY_DATE" />
+            <ScalarProperty Name="DEL_FLAG" ColumnName="DEL_FLAG" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="EcoCounterModel">
+        <EntityTypeShape EntityType="EcoCounterModel.APPLY_RANGE" Width="1.5" PointX="0.75" PointY="0.75" Height="1.723125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcoCounterModel.COMPANY" Width="1.5" PointX="2.75" PointY="0.75" Height="1.5095833333333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcoCounterModel.ECO_ACTION_PERFORMANCES" Width="1.5" PointX="0.75" PointY="3.75" Height="1.936666666666667" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcoCounterModel.ECO_ACTIONS" Width="1.5" PointX="2.75" PointY="3.75" Height="2.7908333333333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcoCounterModel.GROUP" Width="1.5" PointX="4.75" PointY="0.75" Height="1.7231249999999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcoCounterModel.ICON" Width="1.5" PointX="4.75" PointY="3.75" Height="1.7231249999999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcoCounterModel.RANGE" Width="1.5" PointX="6.75" PointY="0.75" Height="1.7231249999999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcoCounterModel.ROLE" Width="1.5" PointX="6.75" PointY="3.75" Height="1.7231249999999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcoCounterModel.USER" Width="1.5" PointX="4.75" PointY="6.75" Height="3.0043749999999996" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

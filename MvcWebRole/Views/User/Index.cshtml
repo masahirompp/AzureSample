@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p id="page_title">
+    ユーザー設定</p>
+<p id="page_text">
+    ユーザー情報の追加／編集／削除を行います。</p>
+<div id="list">
+    @if (ViewBag.Error != null)
+    {
+        <p id="error">@ViewBag.Error</p>
+    }
+    <div id="adduser">
+        <form name="userActionForm" method="get" action="/User/Create">
+        <input class="button01" type="submit" value="ユーザー追加" tabindex="1" />
+        </form>
+    </div>
+    <div id="serchuser">
+        <form method="post" action="/User/Search" class="floatLeft">
+        <table>
+            <tbody>
+                <tr>
+                    <th>
+                        会社名
+                    </th>
+                    <td>
+                        <select id="searchCompanyId" name="searchCompanyId" onchange="setGroupList(groupList, 'searchCompanyId', 'searchGroupId');"
+                            tabindex="2">
+                            @foreach (var c in ViewBag.Companies)
+                            {
+                                if (c.ID == ViewBag.Search.searchCompanyId)
+                                {
+                                <option value="@c.ID" selected="selected">@c.NAME</option>
+                                }
+                                else
+                                {
+                                <option value="@c.ID">@c.NAME</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        部門
+                    </th>
+                    <td>
+                        <select id="searchGroupId" name="searchGroupId" tabindex="3">
+                            @if (ViewBag.LoginUser.ROLE_ID < 30)
+                            {
+                                <option value=""></option>
+                            }
+                            @foreach (var g in ViewBag.Groups)
+                            {
+                                if (g.ID == ViewBag.Search.searchGroupId)
+                                {
+                                <option value="@g.ID" selected="selected">@g.NAME</option>
+                                }
+                                else
+                                {
+                                <option value="@g.ID">@g.NAME</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        ユーザーID
+                    </th>
+                    <td>
+                        <input type="text" name="searchUser" value="@ViewBag.Search.searchUser" tabindex="4"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        名前
+                    </th>
+                    <td>
+                        <input type="text" name="searchName" value="@ViewBag.Search.searchName" tabindex="5"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        権限
+                    </th>
+                    <td>
+                        <select name="searchRoleId" tabindex="6">
+                            @if (ViewBag.LoginUser.ROLE_ID < 30)
+                            {
+                                <option value=""></option>
+                            }
+                            @foreach (var r in ViewBag.Roles)
+                            {
+                                if (r.ID == ViewBag.Search.searchRoleId)
+                                {
+                                <option value="@r.ID" selected="selected">@r.NAME_JA</option>
+                                }
+                                else
+                                {
+                                <option value="@r.ID">@r.NAME_JA</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="hidden" name="page" value="1" />
+        <input class="button01" type="submit" name="search" value="検索" tabindex="6" /><!--上記の条件でユーザーを検索します。-->
+        </form>
+    </div>
+    <div id="serchresult">
+        <table border="1">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    会社名
+                </th>
+                <th>
+                    部門
+                </th>
+                <th>
+                    ユーザー名
+                </th>
+                <th>
+                    名前
+                </th>
+                <th>
+                    権限
+                </th>
+                <th>
+                    削除
+                </th>
+            </tr>
+            @foreach (var r in ViewBag.Results)
+            {
+                <tr>
+                    <td>
+                        @r.ID
+                    </td>
+                    <td>
+                        @r.CompanyName
+                    </td>
+                    <td>
+                        @r.GroupName
+                    </td>
+                    <td>
+                        <a href="/User/Edit/@(r.ID)">@(r.UserId)</a>
+                    </td>
+                    <td>
+                        @r.UserName
+                    </td>
+                    <td>
+                        @r.RoleName
+                    </td>
+                    <td>
+                        <a href="/User/Delete/@(r.ID)" onclick="return confirm('削除しますか')">×</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

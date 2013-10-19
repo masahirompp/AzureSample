@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ecocounterModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ecocounterModelStoreContainer">
+    <EntitySet Name="COMPANIES" EntityType="ecocounterModel.Store.COMPANIES" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GROUPS" EntityType="ecocounterModel.Store.GROUPS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ROLES" EntityType="ecocounterModel.Store.ROLES" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="USERS" EntityType="ecocounterModel.Store.USERS" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="COMPANIES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" Nullable="true" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="GROUPS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" Nullable="true" MaxLength="30" />
+    <Property Name="COMPANY_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ROLES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="NAME" Type="varchar" Nullable="true" MaxLength="30" />
+    <Property Name="NAME_JA" Type="nvarchar" Nullable="true" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GROUP_ID" Type="int" Nullable="false" />
+    <Property Name="USERID" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="NAME" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="PASSWORD" Type="varchar" Nullable="false" MaxLength="8000" />
+    <Property Name="LOGIN_KEY" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="ROLE_ID" Type="int" Nullable="false" />
+    <Property Name="APPLY_DATE" Type="datetime" Nullable="true" />
+    <Property Name="DEL_FLAG" Type="int" Nullable="false" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ecocounterModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ecocounterEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="COMPANIES" EntityType="ecocounterModel.COMPANY" />
+          <EntitySet Name="GROUPS" EntityType="ecocounterModel.GROUP" />
+          <EntitySet Name="ROLES" EntityType="ecocounterModel.ROLE" />
+          <EntitySet Name="USERS" EntityType="ecocounterModel.USER" />
+        </EntityContainer>
+        <EntityType Name="COMPANY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="GROUP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="COMPANY_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="NAME_JA" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GROUP_ID" Type="Int32" Nullable="false" />
+          <Property Name="USERID" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="8000" Unicode="false" FixedLength="false" />
+          <Property Name="LOGIN_KEY" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ROLE_ID" Type="Int32" Nullable="false" />
+          <Property Name="APPLY_DATE" Type="DateTime" />
+          <Property Name="DEL_FLAG" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ecocounterModelStoreContainer" CdmEntityContainer="ecocounterEntities1">
+    <EntitySetMapping Name="COMPANIES">
+      <EntityTypeMapping TypeName="IsTypeOf(ecocounterModel.COMPANY)">
+        <MappingFragment StoreEntitySet="COMPANIES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GROUPS">
+      <EntityTypeMapping TypeName="IsTypeOf(ecocounterModel.GROUP)">
+        <MappingFragment StoreEntitySet="GROUPS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="COMPANY_ID" ColumnName="COMPANY_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ROLES">
+      <EntityTypeMapping TypeName="IsTypeOf(ecocounterModel.ROLE)">
+        <MappingFragment StoreEntitySet="ROLES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="NAME_JA" ColumnName="NAME_JA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERS">
+      <EntityTypeMapping TypeName="IsTypeOf(ecocounterModel.USER)">
+        <MappingFragment StoreEntitySet="USERS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GROUP_ID" ColumnName="GROUP_ID" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="LOGIN_KEY" ColumnName="LOGIN_KEY" />
+          <ScalarProperty Name="ROLE_ID" ColumnName="ROLE_ID" />
+          <ScalarProperty Name="APPLY_DATE" ColumnName="APPLY_DATE" />
+          <ScalarProperty Name="DEL_FLAG" ColumnName="DEL_FLAG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model">
+        <EntityTypeShape EntityType="ecocounterModel.COMPANY" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5095833333333331" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecocounterModel.GROUP" Width="1.5" PointX="2.75" PointY="0.75" Height="1.7231249999999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecocounterModel.ROLE" Width="1.5" PointX="0.75" PointY="3.75" Height="1.7231249999999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecocounterModel.USER" Width="1.5" PointX="2.75" PointY="3.75" Height="3.0043749999999996" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

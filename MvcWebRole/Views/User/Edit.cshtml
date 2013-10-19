@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = ViewBag.Action;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p id="page_title">
+    @string.Format("ユーザー{0}", ViewBag.ActionJA)
+</p>
+<p id="page_text">
+    @string.Format("ユーザー情報の{0}を行います。", @ViewBag.ActionJA)
+</p>
+@if (ViewBag.Error != null)
+{
+<p id="error">@ViewBag.Error</p>
+}
+<div id="edit">
+    <form name="userActionForm" method="post" action="/User/@ViewBag.Action">
+    <table>
+        <tr>
+            <th>
+                会社名
+            </th>
+            <td>
+                <select name="companyId" onchange="setGroupList(groupList, 'companyId', 'groupId');"
+                    tabindex="1">
+                    @foreach (var c in ViewBag.Companies)
+                    {
+                        if (c.ID == ViewBag.COMPANYID)
+                        {
+                        <option value="@c.ID" selected="selected">@c.NAME</option>
+                        }
+                        else
+                        {
+                        <option value="@c.ID">@c.NAME</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                部門
+            </th>
+            <td>
+                <select name="groupId" tabindex="2">
+                    @foreach (var g in ViewBag.Groups)
+                    {
+                        if (g.ID == ViewBag.GROUPID)
+                        {
+                        <option value="@g.ID" selected="selected">@g.NAME</option>
+                        }
+                        else
+                        {
+                        <option value="@g.ID">@g.NAME</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                ユーザーID
+            </th>
+            <td>
+                <input type="hidden" name="id" value="@ViewBag.ID" />
+                <input type="text" name="user" value="@ViewBag.USERID" tabindex="3"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                名前
+            </th>
+            <td>
+                <input type="text" name="name" value="@ViewBag.NAME" tabindex="4"/>
+            </td>
+        </tr>
+        @if (ViewBag.Action == "Create")
+        {
+            <tr>
+                <th>
+                    パスワード
+                </th>
+                <td>
+                    <input type="password" name="password" value="" tabindex="5" />
+                </td>
+            </tr>
+        }
+        <tr>
+            <th>
+                権限
+            </th>
+            <td>
+                <select name="roleId" tabindex="6">
+                    @foreach (var r in ViewBag.Roles)
+                    {
+                        if (r.ID == ViewBag.ROLEID)
+                        {
+                        <option value="@r.ID" selected="selected">@r.NAME_JA</option>
+                        }
+                        else
+                        {
+                        <option value="@r.ID">@r.NAME_JA</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+    </table>
+    <input class="button01" type="submit" name="update" value="@ViewBag.ActionJA" tabindex="7" />
+    </form>
+</div>
